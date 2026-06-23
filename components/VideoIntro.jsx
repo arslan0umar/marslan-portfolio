@@ -58,6 +58,21 @@ export default function VideoIntro() {
     return () => clearTimeout(hideHint);
   }, []);
 
+  useEffect(() => {
+  const video = videoRef.current;
+  const bgVideo = bgVideoRef.current;
+  
+  const markReady = () => {
+    window.__fgVideoReady = true;
+    window.__bgVideoReady = true;
+  };
+  
+  if (video?.readyState >= 3) markReady();
+  else video?.addEventListener("loadeddata", markReady);
+  
+  return () => video?.removeEventListener("loadeddata", markReady);
+}, []);
+
   // Track when video finishes playing (since loop is removed)
   useEffect(() => {
     const video = videoRef.current;
