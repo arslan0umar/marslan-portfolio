@@ -131,7 +131,7 @@ export default function VideoIntro() {
         autoPlay
         muted
         playsInline
-        onLoadedData={() => { window.__bgVideoReady = true; }}
+        onCanPlayThrough={() => { window.__bgVideoReady = true; }}
       />
 
       {/* Foreground sharp video */}
@@ -164,7 +164,7 @@ export default function VideoIntro() {
           autoPlay
           muted={isMuted}
           playsInline
-          onLoadedData={() => { window.__fgVideoReady = true; }}
+          onCanPlayThrough={() => { window.__fgVideoReady = true; }}
         />
      </div>
 

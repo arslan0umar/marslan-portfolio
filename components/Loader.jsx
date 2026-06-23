@@ -17,6 +17,28 @@ export default function Loader() {
   const [progress, setProgress] = useState(0);
   const [opacity, setOpacity] = useState(1);
 
+  // In Loader.jsx
+const MIN_DISPLAY_TIME = 3500; // 3.5 seconds minimum
+
+useEffect(() => {
+  const startTime = Date.now();
+  
+  const checkReady = () => {
+    const elapsed = Date.now() - startTime;
+    const videosReady = window.__bgVideoReady && window.__fgVideoReady;
+    
+    if (videosReady && elapsed >= MIN_DISPLAY_TIME) {
+      hide();
+    } else if (!videosReady && elapsed >= 10000) {
+      // 10s fallback
+      hide();
+    }
+  };
+
+  const interval = setInterval(checkReady, 200);
+  return () => clearInterval(interval);
+}, []);
+
   useEffect(() => {
     const msgInterval = setInterval(() => {
       setMsgIndex(i => (i + 1) % msgs.length);
@@ -36,8 +58,12 @@ export default function Loader() {
     };
 
     // Poll until video signals ready
+// In Loader.jsx, replace the poll with this:
 const poll = setInterval(() => {
-  if (window.__bgVideoReady && window.__fgVideoReady) {
+  const video = document.querySelector('video');
+  const hasFrame = video && video.readyState >= 2 && video.currentTime > 0;
+  
+  if (window.__bgVideoReady && window.__fgVideoReady && hasFrame) {
     clearInterval(poll);
     hide();
   }
