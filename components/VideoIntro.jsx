@@ -142,12 +142,13 @@ export default function VideoIntro() {
         <div className={styles.soundHint}>Tap for sound</div>
       )}
         <video
-        ref={videoRef}
-        className={styles.fgVideo}
-        src="/videos/intro.mp4"
-        autoPlay
-        muted={isMuted}
-        playsInline
+          ref={videoRef}
+          className={styles.fgVideo}
+          src="/videos/intro.mp4"
+          autoPlay
+          muted={isMuted}
+          playsInline
+          onCanPlayThrough={() => { window.__videoReady = true; }}
         />
      </div>
 

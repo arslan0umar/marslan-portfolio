@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 const msgs = [
   "git clone portfolio.exe...",
@@ -23,14 +23,11 @@ export default function Loader() {
     }, 1800);
 
     const progInterval = setInterval(() => {
-      setProgress(p => {
-        const next = Math.min(p + Math.random() * 12, 99);
-        return next;
-      });
+      setProgress(p => Math.min(p + Math.random() * 8, 92));
     }, 300);
 
-    const video = document.querySelector("video");
     const hide = () => {
+      clearInterval(progInterval);
       setProgress(100);
       setTimeout(() => {
         setOpacity(0);
@@ -38,19 +35,25 @@ export default function Loader() {
       }, 400);
     };
 
-    if (video?.readyState >= 3) {
-      hide();
-    } else {
-      video?.addEventListener("canplaythrough", hide);
-    }
+    // Poll until video signals ready
+    const poll = setInterval(() => {
+      if (window.__videoReady) {
+        clearInterval(poll);
+        hide();
+      }
+    }, 200);
 
-    const fallback = setTimeout(hide, 6000);
+    // Fallback after 10 seconds
+    const fallback = setTimeout(() => {
+      clearInterval(poll);
+      hide();
+    }, 10000);
 
     return () => {
       clearInterval(msgInterval);
       clearInterval(progInterval);
+      clearInterval(poll);
       clearTimeout(fallback);
-      video?.removeEventListener("canplaythrough", hide);
     };
   }, []);
 
@@ -79,10 +82,6 @@ export default function Loader() {
       <div style={{ fontFamily: "monospace", fontSize: "0.75rem", color: "rgba(255,122,32,0.7)" }}>
         {Math.floor(progress)}%
       </div>
-
-      <style>{`
-        @keyframes spin { to { transform: rotate(360deg); } }
-      `}</style>
     </div>
   );
 }
