@@ -1,0 +1,153 @@
+.skills {
+  padding: 110px 6% 100px;   /* Increased bottom padding */
+  background: #0a0a0f;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;          /* Important fix */
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.title {
+  font-size: 3.4rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #ff7a20, #ffb366, #ff7a20);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.8rem;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: #888;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.tab {
+  padding: 14px 32px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,122,32,0.2);
+  color: #ccc;
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(10px);
+}
+
+.tab:hover {
+  background: rgba(255,122,32,0.1);
+  color: #ffb366;
+}
+
+.activeTab {
+  background: linear-gradient(135deg, #ff7a20, #ffb366);
+  color: white;
+  border-color: #ff7a20;
+  box-shadow: 0 0 25px rgba(255,122,32,0.4);
+}
+
+.highlightTab {
+  border-color: #ff7a20;
+  box-shadow: 0 0 20px rgba(255,122,32,0.3);
+}
+
+.skillsContent {
+  margin: 50px 50px 5px 50px;         /* Ensures consistent height */
+  display: flex;
+  align-items: center;
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.4rem;
+  width: 100%;
+}
+
+.skillItem {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,122,32,0.15);
+  border-radius: 18px;
+  padding: 1.8rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.skillItem:hover {
+  transform: translateY(-12px) scale(1.03);
+  border-color: #ff7a20;
+  box-shadow: 0 25px 50px rgba(255, 122, 32, 0.15);
+}
+
+.skillDot {
+  width: 14px;
+  height: 14px;
+  background: #ff7a20;
+  border-radius: 50%;
+  box-shadow: 0 0 15px #ff7a20;
+  flex-shrink: 0;
+}
+
+.skillName {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #ddd;
+}
+
+/* Floating Glow Orbs */
+.glowOrb1, .glowOrb2 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.glowOrb1 {
+  width: 600px;
+  height: 600px;
+  background: #ff7a20;
+  top: -10%;
+  left: -10%;
+}
+
+.glowOrb2 {
+  width: 500px;
+  height: 500px;
+  background: #ffb366;
+  bottom: -15%;
+  right: -10%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .skillsGrid {
+    grid-template-columns: 1fr;
+  }
+}

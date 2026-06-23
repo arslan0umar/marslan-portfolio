@@ -1,0 +1,319 @@
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #0a0a0a;
+  opacity: 0;
+  overflow: hidden;
+}
+
+
+.fgVideoWrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 72%;
+  height: 100%;
+  z-index: 1;
+}
+
+.controls {
+  position: absolute;
+  bottom: 6%;
+  right: 6%;
+  z-index: 10;
+}
+
+.fgVideo {
+  width: 100%;
+  transform: translate(150px, -40px);
+    filter:
+    brightness(1.15)
+    contrast(1.08)
+    saturate(1.15);
+  mask-image: radial-gradient(
+    ellipse 60% 75% at 65% 55%,
+    black 25%,
+    rgba(0, 0, 0, 0.85) 45%,
+    rgba(0, 0, 0, 0.4) 65%,
+    transparent 88%
+  );
+}
+
+.bgVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: right;
+  filter: blur(40px) brightness(0.5) saturate(1.2);
+  transform: scale(1.1);
+  z-index: 0;
+}
+
+/* Cinematic gradient overlays for readability */
+.gradientOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+      background:
+      linear-gradient(
+        to top,
+        rgba(10,6,2,.65) 0%,
+        rgba(10,6,2,.12) 35%,
+        rgba(10,6,2,.35) 100%
+      ),
+      linear-gradient(
+        to right,
+        rgba(10,6,2,.45) 0%,
+        transparent 45%,
+        rgba(10,6,2,.25) 100%
+      );
+  pointer-events: none;
+}
+
+/* Content overlay */
+.content {
+  position: absolute;
+  left: 6%;
+  bottom: 14%;
+  z-index: 4;
+  max-width: 640px;
+  color: #fdf6ee;
+}
+
+.tagline {
+  display: inline-block;
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #ffb066;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(3rem, 9vw, 7rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.5rem 0;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.subtitle {
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(253, 246, 238, 0.85);
+  max-width: 480px;
+}
+
+/* Play/Mute controls */
+.controls {
+  position: absolute;
+  bottom: 8%;
+  right: 8%;
+  z-index: 5;
+  display: flex;
+  gap: 1rem;
+}
+
+.controlBtn {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.611);
+  background: rgba(255, 255, 255, 0.188);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  -webkit-backdrop-filter: blur(12px);
+  color: #fdf9f5;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.controlBtn:hover {
+  background: rgba(255, 255, 255, 0.219);
+  transform: scale(1.08);
+}
+
+/* Sound hint badge */
+.soundHint {
+  position: absolute;
+  bottom: 18%;
+  right: 6%;
+  z-index: 5;
+  background: rgba(255, 146, 72, 0.15);
+  border: 1px solid rgba(255, 146, 72, 0.4);
+  color: #ffd9b0;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  backdrop-filter: blur(8px);
+  animation: pulseHint 2s ease-in-out infinite;
+}
+
+@keyframes pulseHint {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* Scroll indicator */
+.scrollIndicator {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: rgba(253, 246, 238, 0.7);
+}
+
+.scrollLine {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(to bottom, rgba(255, 176, 102, 0.9), transparent);
+  animation: scrollPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0% { transform: scaleY(0.3); opacity: 0.3; transform-origin: top; }
+  50% { transform: scaleY(1); opacity: 1; transform-origin: top; }
+  100% { transform: scaleY(0.3); opacity: 0.3; transform-origin: top; }
+}
+
+.scrollText {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .content {
+    left: 5%;
+    right: 5%;
+    bottom: 18%;
+  }
+
+  .controls {
+    bottom: 5%;
+    right: 5%;
+  }
+
+  .controlBtn {
+    width: 40px;
+    height: 40px;
+  }
+}
+/* Large desktop screens (1600px+) — video was too dominant, pull it back */
+@media (min-width: 1600px) {
+  .fgVideoWrapper {
+    width: 58%;
+  }
+
+  .content {
+    left: 8%;
+    max-width: 700px;
+  }
+}
+
+/* Standard desktop (the sweet spot you already tuned) */
+@media (min-width: 1024px) and (max-width: 1599px) {
+  .fgVideoWrapper {
+    width: 72%;
+  }
+}
+
+/* Tablets */
+@media (max-width: 1023px) {
+  .fgVideoWrapper {
+    width: 90%;
+  }
+
+  .content {
+    left: 6%;
+    right: 6%;
+    bottom: 16%;
+    max-width: 90%;
+  }
+
+  .name {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+  }
+}
+
+/* Mobile — stack video full-bleed behind, content lower, smaller controls */
+@media (max-width: 640px) {
+  .fgVideoWrapper {
+    width: 100%;
+  }
+
+  .fgVideo {
+    transform: translate(0, 35px);
+    object-position: center 20%;
+    -webkit-mask-image: radial-gradient(
+      ellipse 80% 70% at 50% 35%,
+      black 25%,
+      rgba(0, 0, 0, 0.85) 45%,
+      rgba(0, 0, 0, 0.4) 65%,
+      transparent 88%
+    );
+    mask-image: radial-gradient(
+      ellipse 80% 70% at 50% 35%,
+      black 25%,
+      rgba(0, 0, 0, 0.85) 45%,
+      rgba(0, 0, 0, 0.4) 65%,
+      transparent 88%
+    );
+  }
+
+  .content {
+    left: 5%;
+    right: 5%;
+    bottom: 12%;
+  }
+
+  .tagline {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+  }
+
+  .name {
+    font-size: clamp(2.2rem, 11vw, 3.2rem);
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .controls {
+    bottom: 45%;
+    right: 4%;
+  }
+
+  .controlBtn {
+    width: 38px;
+    height: 38px;
+    font-size: 0.85rem;
+  }
+
+  .soundHint {
+    bottom: 40%;
+    right: 2%;
+    font-size: 0.5rem;
+  }
+}

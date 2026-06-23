@@ -1,0 +1,388 @@
+.projects {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  background: #0c0c0e;
+  padding: 100px 0 120px;
+  margin-top: -40px;
+  border-radius: 40px 40px 0 0;
+}
+
+/* Header */
+.header {
+  text-align: left;
+  max-width: 1200px;
+  margin: 0 auto 60px;
+  padding: 0 5%;
+}
+
+.headerLabel {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #ff7a20;
+  margin-bottom: 16px;
+}
+
+.headerTitle {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  color: #f5f5f5;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.headerDesc {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 0;
+  max-width: 480px;
+  line-height: 1.5;
+}
+
+/* Cards Container */
+.cardsContainer {
+  position: relative;
+  width: 92%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Card Wrapper - Sticky */
+.cardWrapper {
+  position: sticky;
+  height: 85vh;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+/* Card */
+.card {
+  width: 100%;
+  height: 100%;
+  background: #141418;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 28px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  transform-origin: top center;
+  will-change: transform;
+}
+
+/* Content Side */
+.contentSide {
+  padding: 48px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  overflow-y: auto;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+
+.projectNum {
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1;
+  opacity: 0.25;
+  font-family: 'SF Mono', monospace;
+}
+
+.projectTag {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid;
+  letter-spacing: 0.02em;
+}
+
+.projectTitle {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  color: #f5f5f5;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.projectSubtitle {
+  font-size: 1.05rem;
+  color: #888;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.projectDesc {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #aaa;
+  margin: 8px 0 0 0;
+}
+
+.projectNote {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  font-size: 0.85rem;
+  color: #777;
+  margin-top: 4px;
+  width: fit-content;
+}
+
+.noteDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.techRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.techPill {
+  padding: 7px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #999;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  font-family: 'SF Mono', monospace;
+  letter-spacing: -0.01em;
+}
+
+.projectLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+  width: fit-content;
+}
+
+.projectLink:hover {
+  opacity: 0.7;
+}
+
+.projectLinkDisabled {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #555;
+  width: fit-content;
+}
+
+/* Image Side */
+.imageSide {
+  position: relative;
+  overflow: hidden;
+  background: #0e0e12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageFrame {
+  width: 85%;
+  height: 75%;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.projectImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.card:hover .projectImage {
+  transform: scale(1.03);
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Background glow */
+.projects::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 122, 32, 0.03) 0%, transparent 70%);
+  top: -100px;
+  right: -100px;
+  pointer-events: none;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 968px) {
+  .card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 280px;
+  }
+
+  .contentSide {
+    padding: 32px 28px;
+    gap: 14px;
+    order: 2;
+  }
+
+  .imageSide {
+    order: 1;
+    min-height: 280px;
+  }
+
+  .imageFrame {
+    width: 90%;
+    height: 85%;
+  }
+
+  .projectNum {
+    font-size: 2.5rem;
+  }
+
+  .projectTitle {
+    font-size: 1.6rem;
+  }
+
+  .projectDesc {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .projects {
+    padding: 70px 0 80px;
+    border-radius: 24px 24px 0 0;
+  }
+
+  .header {
+    margin-bottom: 40px;
+  }
+
+  .headerTitle {
+    font-size: 2rem;
+  }
+
+  .headerDesc {
+    font-size: 0.95rem;
+  }
+
+  .cardWrapper {
+    height: 90vh;
+    top: 70px !important;
+  }
+
+  .card {
+    border-radius: 20px;
+    grid-template-rows: auto 200px;
+  }
+
+  .contentSide {
+    padding: 24px 20px;
+    gap: 12px;
+  }
+
+  .imageSide {
+    min-height: 200px;
+  }
+
+  .imageFrame {
+    border-radius: 14px;
+  }
+
+  .projectNum {
+    font-size: 2rem;
+  }
+
+  .projectTitle {
+    font-size: 1.4rem;
+  }
+
+  .projectSubtitle {
+    font-size: 0.9rem;
+  }
+
+  .projectDesc {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .projectNote {
+    padding: 10px 12px;
+    font-size: 0.8rem;
+  }
+
+  .techPill {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  .cardsContainer {
+    max-width: 1300px;
+  }
+
+  .contentSide {
+    padding: 56px 52px;
+  }
+
+  .projectTitle {
+    font-size: 3rem;
+  }
+
+  .projectDesc {
+    font-size: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transform: none !important;
+  }
+
+  .projectImage {
+    transition: none;
+  }
+}
