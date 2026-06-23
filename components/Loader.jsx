@@ -36,12 +36,12 @@ export default function Loader() {
     };
 
     // Poll until video signals ready
-    const poll = setInterval(() => {
-      if (window.__videoReady) {
-        clearInterval(poll);
-        hide();
-      }
-    }, 200);
+const poll = setInterval(() => {
+  if (window.__bgVideoReady && window.__fgVideoReady) {
+    clearInterval(poll);
+    hide();
+  }
+}, 200);
 
     // Fallback after 10 seconds
     const fallback = setTimeout(() => {

@@ -116,6 +116,7 @@ export default function VideoIntro() {
         autoPlay
         muted
         playsInline
+        onCanPlayThrough={() => { window.__bgVideoReady = true; }}
       />
 
       {/* Foreground sharp video */}
