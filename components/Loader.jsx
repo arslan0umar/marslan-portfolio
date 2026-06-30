@@ -17,38 +17,22 @@ export default function Loader() {
   const [progress, setProgress] = useState(0);
   const [opacity, setOpacity] = useState(1);
 
-  // In Loader.jsx
-const MIN_DISPLAY_TIME = 3500; // 3.5 seconds minimum
-
-useEffect(() => {
-  const startTime = Date.now();
-  
-  const checkReady = () => {
-    const elapsed = Date.now() - startTime;
-    const videosReady = window.__bgVideoReady && window.__fgVideoReady;
-    
-    if (videosReady && elapsed >= MIN_DISPLAY_TIME) {
-      hide();
-    } else if (!videosReady && elapsed >= 10000) {
-      // 10s fallback
-      hide();
-    }
-  };
-
-  const interval = setInterval(checkReady, 200);
-  return () => clearInterval(interval);
-}, []);
-
   useEffect(() => {
+    const startTime = Date.now();
+    
+    // Message rotation
     const msgInterval = setInterval(() => {
       setMsgIndex(i => (i + 1) % msgs.length);
     }, 1800);
 
+    // Progress bar
     const progInterval = setInterval(() => {
       setProgress(p => Math.min(p + Math.random() * 8, 92));
     }, 300);
 
+    // Hide function
     const hide = () => {
+      clearInterval(msgInterval);
       clearInterval(progInterval);
       setProgress(100);
       setTimeout(() => {
@@ -57,29 +41,27 @@ useEffect(() => {
       }, 400);
     };
 
-    // Poll until video signals ready
-// In Loader.jsx, replace the poll with this:
-const poll = setInterval(() => {
-  const video = document.querySelector('video');
-  const hasFrame = video && video.readyState >= 2 && video.currentTime > 0;
-  
-  if (window.__bgVideoReady && window.__fgVideoReady && hasFrame) {
-    clearInterval(poll);
-    hide();
-  }
-}, 200);
+    // Check if videos are ready + minimum display time
+    const checkReady = () => {
+      const elapsed = Date.now() - startTime;
+      const videosReady = window.__bgVideoReady && window.__fgVideoReady;
+      const video = document.querySelector('video');
+      const hasFrame = video && video.readyState >= 2 && video.currentTime > 0;
+      
+      if (videosReady && hasFrame && elapsed >= 3500) {
+        hide();
+      } else if (elapsed >= 10000) {
+        // 10s fallback — hide anyway
+        hide();
+      }
+    };
 
-    // Fallback after 10 seconds
-    const fallback = setTimeout(() => {
-      clearInterval(poll);
-      hide();
-    }, 10000);
+    const poll = setInterval(checkReady, 200);
 
     return () => {
       clearInterval(msgInterval);
       clearInterval(progInterval);
       clearInterval(poll);
-      clearTimeout(fallback);
     };
   }, []);
 
