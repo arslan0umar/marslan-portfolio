@@ -8,6 +8,7 @@ const msgs = [
   "fighting off imposter syndrome...",
   "polishing pixels...",
   "loading Muhammad Arslan...",
+  "Slow internet Connection",
   "almost there, don't leave!",
 ];
 

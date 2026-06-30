@@ -60,11 +60,9 @@ export default function VideoIntro() {
 
   useEffect(() => {
   const video = videoRef.current;
-  const bgVideo = bgVideoRef.current;
   
   const markReady = () => {
     window.__fgVideoReady = true;
-    window.__bgVideoReady = true;
   };
   
   if (video?.readyState >= 3) markReady();
