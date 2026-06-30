@@ -18,6 +18,14 @@ export default function VideoIntro() {
   const [isMuted, setIsMuted] = useState(true);
   const [showSoundHint, setShowSoundHint] = useState(true);
 
+  useEffect(() => {
+  window.__startIntroVideos = () => {
+    videoRef.current?.play().catch(() => {});
+    bgVideoRef.current?.play().catch(() => {});
+  };
+  return () => { delete window.__startIntroVideos; };
+}, []);
+
   // GSAP entrance animation
   useEffect(() => {
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -126,7 +134,6 @@ export default function VideoIntro() {
         ref={bgVideoRef}
         className={styles.bgVideo}
         src="/videos/intro.mp4"
-        autoPlay
         muted
         playsInline
         onCanPlayThrough={() => { window.__bgVideoReady = true; }}
@@ -159,7 +166,6 @@ export default function VideoIntro() {
           ref={videoRef}
           className={styles.fgVideo}
           src="/videos/intro.mp4"
-          autoPlay
           muted={isMuted}
           playsInline
           onCanPlayThrough={() => { window.__fgVideoReady = true; }}

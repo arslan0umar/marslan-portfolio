@@ -32,32 +32,34 @@ export default function Loader() {
     }, 300);
 
     // Hide function
-    const hide = () => {
-      clearInterval(msgInterval);
-      clearInterval(progInterval);
-      setProgress(100);
-      setTimeout(() => {
-        setOpacity(0);
-        setTimeout(() => setVisible(false), 500);
-      }, 400);
-    };
+  const hide = () => {
+  clearInterval(msgInterval);
+  clearInterval(progInterval);
+  clearInterval(poll);
+  setProgress(100);
+  setTimeout(() => {
+    setOpacity(0);
+    setTimeout(() => setVisible(false), 500);
+  }, 400);
+  setTimeout(() => {
+    window.__startIntroVideos?.();
+  }, 2000);
+};
 
     // Check if videos are ready + minimum display time
     const checkReady = () => {
-      const elapsed = Date.now() - startTime;
-      const videosReady = window.__bgVideoReady && window.__fgVideoReady;
-      const video = document.querySelector('video');
-      const hasFrame = video && video.readyState >= 2 && video.currentTime > 0;
-      
-      if (videosReady && hasFrame && elapsed >= 3500) {
-        hide();
-      } else if (elapsed >= 10000) {
-        // 10s fallback — hide anyway
-        hide();
-      }
-    };
+  const elapsed = Date.now() - startTime;
+  const videosReady = window.__bgVideoReady && window.__fgVideoReady;
+  
+  if (videosReady && elapsed >= 3500) {
+    hide();
+  } else if (elapsed >= 10000) {
+    hide();
+  }
+};
 
-    const poll = setInterval(checkReady, 200);
+let poll;
+poll = setInterval(checkReady, 200);
 
     return () => {
       clearInterval(msgInterval);
